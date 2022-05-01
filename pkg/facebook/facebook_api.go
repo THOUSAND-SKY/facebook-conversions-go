@@ -37,7 +37,7 @@ func New(input APIInput) *API {
 		client:      facebookgen.NewAPIClient(facebookgen.NewConfiguration()).DefaultApi,
 		accessToken: input.AccessToken,
 		pixelID:     input.PixelID,
-		timeout:     input.Timeout,
+		timeout:     t,
 	}
 }
 
