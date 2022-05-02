@@ -12,6 +12,10 @@ import (
 )
 
 func TestAPI_PostEvent(t *testing.T) {
+	if os.Getenv("FB_ACCESS_TOKEN") == "" {
+		t.Error("required env variables not set")
+		return
+	}
 	type fields struct {
 		accessToken string
 		pixelID     string
