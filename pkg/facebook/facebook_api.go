@@ -72,19 +72,24 @@ func hashUserDataFields(e facebookgen.EventRequest) facebookgen.EventRequest {
 	for _, e2 := range e.Data {
 		if e2.UserData != nil {
 			u := e2.UserData
-			u2 := facebookgen.UserData{}
-			u2.Em = hashString(u.Em)
-			u2.Ph = hash(u.Ph)
-			u2.Fn = hashString(u.Fn)
-			u2.Ln = hashString(u.Ln)
-			u2.Ge = hash(u.Ge)
-			u2.Db = hash(u.Db)
-			u2.Ct = hash(u.Ct)
-			u2.St = hash(u.St)
-			u2.Zp = hash(u.Zp)
-			u2.Country = hashString(u.Country)
-			u2.ExternalId = hash(u.ExternalId)
-			e2.UserData = &u2
+			e2.UserData = &facebookgen.UserData{
+				Em:              hashString(u.Em),
+				Ph:              hash(u.Ph),
+				Fn:              hashString(u.Fn),
+				Ln:              hashString(u.Ln),
+				Ge:              hash(u.Ge),
+				Db:              hash(u.Db),
+				Ct:              hash(u.Ct),
+				St:              hash(u.St),
+				Zp:              hash(u.Zp),
+				Country:         hashString(u.Country),
+				ExternalId:      hash(u.ExternalId),
+				ClientIpAddress: u.ClientIpAddress,
+				ClientUserAgent: u.ClientUserAgent,
+				Fbc:             u.Fbc,
+				Fbp:             u.Fbp,
+				SubscriptionId:  u.SubscriptionId,
+			}
 			newData = append(newData, e2)
 		}
 	}
