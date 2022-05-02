@@ -89,6 +89,7 @@ func hashUserDataFields(e facebookgen.EventRequest) facebookgen.EventRequest {
 				Fbc:             u.Fbc,
 				Fbp:             u.Fbp,
 				SubscriptionId:  u.SubscriptionId,
+				FbLoginId:       u.FbLoginId,
 			}
 			newData = append(newData, e2)
 		}

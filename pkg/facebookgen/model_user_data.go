@@ -44,4 +44,6 @@ type UserData struct {
 	Fbp string `json:"fbp,omitempty"`
 	// The subscription ID for the user in this transaction. This is similar to the order ID for an individual product.
 	SubscriptionId string `json:"subscription_id,omitempty"`
+	// Do not hash. The ID issued by Facebook when a person first logs into an instance of an app. This is also known as App-Scoped ID.
+	FbLoginId int64 `json:"fb_login_id,omitempty"`
 }

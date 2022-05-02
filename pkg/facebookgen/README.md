@@ -17,7 +17,7 @@ import "./swagger"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://graph.facebook.com/v8.0*
+All URIs are relative to *https://graph.facebook.com/v13.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

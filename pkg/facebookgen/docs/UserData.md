@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Fbc** | **string** | The Facebook click ID value stored in the _fbc browser cookie under your domain. See Managing fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc), or generate this value from a fbclid query parameter. | [optional] [default to null]
 **Fbp** | **string** | The Facebook browser ID value stored in the _fbp browser cookie under your domain. See Managing fbc and fbp Parameters for how to get this value (https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc). | [optional] [default to null]
 **SubscriptionId** | **string** | The subscription ID for the user in this transaction. This is similar to the order ID for an individual product. | [optional] [default to null]
+**FbLoginId** | **int64** | Do not hash. The ID issued by Facebook when a person first logs into an instance of an app. This is also known as App-Scoped ID. | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

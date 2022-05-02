@@ -1,6 +1,6 @@
 # \DefaultApi
 
-All URIs are relative to *https://graph.facebook.com/v8.0*
+All URIs are relative to *https://graph.facebook.com/v13.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
