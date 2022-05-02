@@ -9,7 +9,6 @@ script_folder="$(realpath "$(dirname "$0")")"
 user="$(id -u):$(id -g)"
 commands="
 cd /opt/swagger-codegen-cli
-apk add --no-cache git
 java -jar swagger-codegen-cli.jar generate -i scripts/server-side-api.yaml -l go -o /api
 chown $user -R /api
 "
