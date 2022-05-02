@@ -45,7 +45,9 @@ func New(input APIInput) *API {
 //
 // May want to use `PostEvent` instead.
 func (a *API) RawSend(ctx context.Context, p facebookgen.EventRequest) (facebookgen.ResponseSuccess, *http.Response, error) {
-	ctx = context.WithValue(ctx, facebookgen.ContextAPIKey, a.accessToken)
+	ctx = context.WithValue(ctx, facebookgen.ContextAPIKey, facebookgen.APIKey{
+		Key: a.accessToken,
+	})
 	ctx, cancel := context.WithTimeout(ctx, a.timeout)
 	defer cancel()
 
@@ -58,22 +60,19 @@ func (a *API) RawSend(ctx context.Context, p facebookgen.EventRequest) (facebook
 //
 // https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/customer-information-parameters
 func (a *API) PostEvent(ctx context.Context, p facebookgen.EventRequest) (facebookgen.ResponseSuccess, error) {
-	hashUserDataFields(&p)
-	success, _, err := a.RawSend(ctx, p)
+	success, _, err := a.RawSend(ctx, hashUserDataFields(p))
 	return success, err
 }
 
-// hashUserDataFields hashes event keys in-place.
+// hashUserDataFields hashes event keys.
 //
 // https://developers.facebook.com/docs/marketing-api/conversions-api/parameters
-func hashUserDataFields(e *facebookgen.EventRequest) {
-	if e == nil {
-		return
-	}
+func hashUserDataFields(e facebookgen.EventRequest) facebookgen.EventRequest {
+	newData := make([]facebookgen.Event, 0)
 	for _, e2 := range e.Data {
 		if e2.UserData != nil {
 			u := e2.UserData
-			u2 := &facebookgen.UserData{}
+			u2 := facebookgen.UserData{}
 			u2.Em = hashString(u.Em)
 			u2.Ph = hash(u.Ph)
 			u2.Fn = hashString(u.Fn)
@@ -85,9 +84,12 @@ func hashUserDataFields(e *facebookgen.EventRequest) {
 			u2.Zp = hash(u.Zp)
 			u2.Country = hashString(u.Country)
 			u2.ExternalId = hash(u.ExternalId)
-			e2.UserData = u2
+			e2.UserData = &u2
+			newData = append(newData, e2)
 		}
 	}
+	e.Data = newData
+	return e
 }
 
 func hashString(s string) string {
